@@ -3,9 +3,11 @@ import { ProductPage } from "../page-objects/ProductsPage.js"
 import { Navigation } from "../page-objects/Navigations.js" 
 import { Checkout } from "../page-objects/CheckoutPage.js"
 
-test.only("New User full End-to-End test", async ({page}) =>{
+test.only("New User Full End-to-End Test", async ({page}) =>{
     const productPage = new ProductPage(page)
     await productPage.visit()
+
+    await productPage.sortByCheapest()
 
     await productPage.addProductToBasket(0)
     await productPage.addProductToBasket(1)
