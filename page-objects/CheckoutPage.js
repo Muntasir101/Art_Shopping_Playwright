@@ -1,15 +1,18 @@
+import { expect } from "@playwright/test"
+
 export class Checkout {
     constructor(page) {
         this.page = page
 
-        this.basketCard = page.locator('[data-qa="basket-card"]')
+        this.basketCards = page.locator('[data-qa="basket-card"]')
         this.basketItemPrice = page.locator('[data-qa="basket-item-price"]')
         this.basketItemRemoveButton = page.locator('[data-qa="basket-card-remove-item"]')
     }
 
 
     removeCheapestProduct = async () => {
-        await this.basketCard.first().waitFor()
+        const itemsBeforeRemove = await this.basketCards.count()
+        await this.basketCards.first().waitFor()
         await this.basketItemPrice.first().waitFor()
         const allPriceTexts = await this.basketItemPrice.allInnerTexts()
         //console.log(allPriceTexts) // [ '499$', '599$', '320$' ]
@@ -24,15 +27,20 @@ export class Checkout {
 
         const smallestPriceIndex = justNumbers.indexOf(smallestPrice)
         //console.log(smallestPriceIndex)
+        
+        const specificRemoveButton = this.basketItemRemoveButton.nth(smallestPriceIndex)
+        await specificRemoveButton.waitFor()
+        await specificRemoveButton.click()
 
-        await this.basketItemRemoveButton.nth(smallestPriceIndex).waitFor()
-        await this.basketItemRemoveButton.nth(smallestPriceIndex).click()
+        // verify item remove
+        await expect(this.basketCards).toHaveCount(itemsBeforeRemove - 1)
         
         //await this.page.pause()
     }
 
     removeExpensiveProduct = async () => {
-        await this.basketCard.first().waitFor()
+        const itemsBeforeRemove = await this.basketCards.count()
+        await this.basketCards.first().waitFor()
         await this.basketItemPrice.first().waitFor()
         const allPriceTexts = await this.basketItemPrice.allInnerTexts()
         //console.log(allPriceTexts) // [ '499$', '599$', '320$' ]
@@ -48,8 +56,12 @@ export class Checkout {
         const highestPriceIndex = justNumbers.indexOf(highestPrice)
         //console.log(highestPriceIndex)
 
-        await this.basketItemRemoveButton.nth(highestPriceIndex).waitFor()
-        await this.basketItemRemoveButton.nth(highestPriceIndex).click()
+        const specificRemoveButton = this.basketItemRemoveButton.nth(highestPriceIndex)
+        await specificRemoveButton.waitFor()
+        await specificRemoveButton.click()
+
+         // verify item remove
+         await expect(this.basketCards).toHaveCount(itemsBeforeRemove - 1)
         
         await this.page.pause()
     }
