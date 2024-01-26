@@ -8,6 +8,7 @@ test.only("New User Full End-to-End Test", async ({page}) =>{
     await productPage.visit()
 
     await productPage.sortByCheapest()
+    await productPage.sortByDecending()
 
     await productPage.addProductToBasket(0)
     await productPage.addProductToBasket(1)

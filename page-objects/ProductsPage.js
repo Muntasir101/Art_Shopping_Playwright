@@ -49,5 +49,20 @@ export class ProductPage{
         expect (productTitleAfterSorting).not.toEqual(productTitleBeforeSorting)
 
     }
+
+    sortByDecending = async () => {
+        await this.sortDropdown.waitFor()
+        //get ordr of the products
+        await this.productTitle.first().waitFor()
+        const productTitleBeforeSorting = await this.productTitle.allInnerTexts()
+        await this.sortDropdown.selectOption("price-desc")
+        //get ordr of the products
+        const productTitleAfterSorting = await this.productTitle.allInnerTexts()
+        // expect that these list are different
+        expect (productTitleAfterSorting).not.toEqual(productTitleBeforeSorting)
+
+        await this.page.pause()
+
+    }
   
 }
