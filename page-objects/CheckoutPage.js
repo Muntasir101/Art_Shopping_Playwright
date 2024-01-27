@@ -61,8 +61,8 @@ export class Checkout {
         await specificRemoveButton.click()
 
          // verify item remove
-         await expect(this.basketCards).toHaveCount(itemsBeforeRemove - 1)
+        await expect(this.basketCards).toHaveCount(itemsBeforeRemove - 1)
         
-        await this.page.pause()
+        await this.page.close()
     }
 }
