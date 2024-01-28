@@ -11,8 +11,6 @@ export class Login{
         await this.moveToSignupButton.waitFor()
         await this.moveToSignupButton.click()
         await this.page.waitForURL(/\/signup/)
-
-        await this.page.pause()
     }
 
 }
