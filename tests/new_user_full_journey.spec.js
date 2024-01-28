@@ -2,6 +2,7 @@ import { test} from "@playwright/test"
 import { ProductPage } from "../page-objects/ProductsPage.js"
 import { Navigation } from "../page-objects/Navigations.js" 
 import { Checkout } from "../page-objects/CheckoutPage.js"
+import { Login } from "../page-objects/LoginPage.js"
 
 test.only("New User Full End-to-End Test", async ({page}) =>{
     const productPage = new ProductPage(page)
@@ -20,6 +21,11 @@ test.only("New User Full End-to-End Test", async ({page}) =>{
     const checkout = new Checkout(page)
     await checkout.removeCheapestProduct()
     await checkout.removeExpensiveProduct()
+    await checkout.continueToCheckout()
+
+    const login = new Login(page)
+    await login.moveToSignup()
+
 
     //await page.pause()
  

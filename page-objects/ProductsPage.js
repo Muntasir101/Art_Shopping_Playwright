@@ -61,7 +61,7 @@ export class ProductPage{
         // expect that these list are different
         expect (productTitleAfterSorting).not.toEqual(productTitleBeforeSorting)
 
-        await this.page.pause()
+        //await this.page.pause()
 
     }
   

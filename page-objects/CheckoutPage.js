@@ -7,6 +7,8 @@ export class Checkout {
         this.basketCards = page.locator('[data-qa="basket-card"]')
         this.basketItemPrice = page.locator('[data-qa="basket-item-price"]')
         this.basketItemRemoveButton = page.locator('[data-qa="basket-card-remove-item"]')
+        this.checkoutButton = page.locator('[data-qa="continue-to-checkout"]')
+
     }
 
 
@@ -63,6 +65,14 @@ export class Checkout {
          // verify item remove
         await expect(this.basketCards).toHaveCount(itemsBeforeRemove - 1)
         
-        await this.page.close()
+        //await this.page.close()
     }
+
+    continueToCheckout = async () => {
+        await this.checkoutButton.waitFor()
+        await this.checkoutButton.click()
+        await this.page.waitForURL(/\/login/)
+    }
+
+    
 }
