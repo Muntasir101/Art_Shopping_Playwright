@@ -13,17 +13,19 @@ constructor(page) {
 
     signUpAsNewUser = async () => {
         const commonUtils = new commonFunctions();
+        const generatedNewEmail = commonUtils.randomEmail(); // Call the randomEmail function
+        const generatedNewPassword = commonUtils.randomPassword(); // Call the randomPassword function
+        // Save credentials to JSON file
+        commonUtils.saveCredentialsToJson(generatedNewEmail, generatedNewPassword);
 
         await this.emailField.waitFor()
         await this.emailField.clear()
-        const generatedNewEmail = commonUtils.randomEmail(); // Call the randomEmail function
-        await this.emailField.fill(generatedNewEmail)
 
+        await this.emailField.fill(generatedNewEmail)
         await this.passwordField.waitFor()
         await this.passwordField.clear()
-        const generatedNewPassword = commonUtils.randomPassword(); // Call the randomEmail function
-        await this.passwordField.fill(generatedNewPassword)
 
+        await this.passwordField.fill(generatedNewPassword)
         await this.registerButton.waitFor()
         await this.registerButton.click()
 
