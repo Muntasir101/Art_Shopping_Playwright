@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test"
+import { commonFunctions } from "../utils/common"
 
 export class Signup {
 constructor(page) {
@@ -9,23 +10,26 @@ constructor(page) {
     this.registerButton = page.locator('[type] div')
     }
 
-    createAccount = async () => {
+
+    signUpAsNewUser = async () => {
+        const commonUtils = new commonFunctions();
+
         await this.emailField.waitFor()
         await this.emailField.clear()
-        await this.emailField.type("Admin")
+        const generatedNewEmail = commonUtils.randomEmail(); // Call the randomEmail function
+        await this.emailField.fill(generatedNewEmail)
 
         await this.passwordField.waitFor()
         await this.passwordField.clear()
-        await this.passwordField.type("123456")
+        const generatedNewPassword = commonUtils.randomPassword(); // Call the randomEmail function
+        await this.passwordField.fill(generatedNewPassword)
 
         await this.registerButton.waitFor()
         await this.registerButton.click()
 
         await this.page.pause()
 
-
     }
-
 
 
 }
