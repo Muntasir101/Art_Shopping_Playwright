@@ -1,4 +1,5 @@
 import { commonFunctions } from "../utils/common"
+import { deliveryDetails } from "../data/dataDeliveryDetails"
 
 export class DeliveryDetails{
     constructor(page) {
@@ -13,24 +14,22 @@ export class DeliveryDetails{
         this.continuePatmentButton = page.getByRole('button', { name: 'Continue to payment' })
     }
 
-    fillDetails = async () => {
-        const commonUtils = new commonFunctions();
-        const deliveryDetailsData = commonUtils.readJsonFile('../data/deliveryDetails.json');
-
+    fillDetails = async (deliveryDetails) => {
+        
         await this.firstName.waitFor()
-        await this.firstName.fill(deliveryDetailsData.firstName)
+        await this.firstName.fill(deliveryDetails.firstName)
 
         await this.lastName.waitFor()
-        await this.lastName.fill(deliveryDetailsData.lastName)
+        await this.lastName.fill(deliveryDetails.lastName)
 
         await this.street.waitFor()
-        await this.street.fill(deliveryDetailsData.street)
+        await this.street.fill(deliveryDetails.street)
 
         await this.postCode.waitFor()
-        await this.postCode.fill(deliveryDetailsData.postCode)
+        await this.postCode.fill(deliveryDetails.postCode)
 
         await this.city.waitFor()
-        await this.city.fill(deliveryDetailsData.city)
+        await this.city.fill(deliveryDetails.city)
 
         await this.saveAddressButton.waitFor()
         await this.saveAddressButton.click()
