@@ -15,7 +15,7 @@ export class DeliveryDetails{
 
     fillDetails = async () => {
         const commonUtils = new commonFunctions();
-        const deliveryDetailsData = commonUtils.readJsonFile('data/deliveryDetails.json');
+        const deliveryDetailsData = commonUtils.readJsonFile('../data/deliveryDetails.json');
 
         await this.firstName.waitFor()
         await this.firstName.fill(deliveryDetailsData.firstName)
