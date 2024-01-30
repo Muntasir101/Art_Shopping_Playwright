@@ -36,4 +36,11 @@ export class commonFunctions{
         fs.writeFileSync(filePath, jsonString, 'utf-8');
     };
 
+    readJsonFile = () => {
+        // Use path.join to ensure cross-platform compatibility
+        const filePath = path.join(__dirname, '../data/deliveryDetails.json');
+        const jsonData = fs.readFileSync(filePath, 'utf-8');
+        return JSON.parse(jsonData);
+    };
+
 }

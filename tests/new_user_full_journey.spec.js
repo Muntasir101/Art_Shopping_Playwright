@@ -4,6 +4,7 @@ import { Navigation } from "../page-objects/Navigations.js"
 import { Checkout } from "../page-objects/CheckoutPage.js"
 import { Login } from "../page-objects/LoginPage.js"
 import { Signup } from "../page-objects/RegisterPage.js"
+import { DeliveryDetails } from "../page-objects/DeliveryDetailsPage.js"
 
 test.only("New User Full End-to-End Test", async ({page}) =>{
     const productPage = new ProductPage(page)
@@ -30,7 +31,9 @@ test.only("New User Full End-to-End Test", async ({page}) =>{
     const signup = new Signup(page)
     await signup.signUpAsNewUser()
 
+    const deliveryDetails = new DeliveryDetails(page)
+    await deliveryDetails.fillDetails(page)
 
-    //await page.pause()
+    await page.pause()
  
 })
