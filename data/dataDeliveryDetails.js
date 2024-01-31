@@ -3,5 +3,6 @@ export const deliveryDetails ={
     "lastName":"Test Last Name",
     "street" :"Test Street",
     "postCode":"1234",
-    "city":"Test City"
+    "city":"Test City",
+    "country":"Bangladesh"
 }
