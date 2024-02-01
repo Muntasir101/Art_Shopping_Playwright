@@ -1,8 +1,8 @@
 {
-    "firstName":"Test First Name",
-    "lastName":"Test Last Name",
-    "street" :"Test Street",
-    "postCode":"1234",
-    "city":"Test City",
-    "country":"Bangladesh"
+    "firstName": "Test First Name",
+    "lastName": "Test Last Name",
+    "street": "Test Street",
+    "postCode": "1234",
+    "city": "Test City",
+    "country": "Bangladesh"
 }
