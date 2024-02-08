@@ -1,35 +1,43 @@
 /**
- * Login class represents the login functionality in a Playwright test.
- * It provides methods to interact with the login page, specifically moving to the signup page.
- * @class
+ * `Navigation` class handles the navigation-related actions in the application.
  */
-export class Login {
+export class Navigation {
     /**
-     * Creates an instance of the Login class.
-     * @constructor
-     * @param {Page} page - Playwright Page object representing the current page.
+     * Constructs a new instance of the `Navigation` class.
+     * @param {Object} page - The page object from Playwright.
      */
     constructor(page) {
-        this.page = page;
+        this.page = page
 
-        // Locator for the "Move to Signup" button on the login page.
-        this.moveToSignupButton = page.locator('[data-qa="go-to-signup-button"]');
+        // Locator for the basket counter element.
+        this.basketCounter = page.locator("[data-qa='header-basket-count']")
+        // Locator for the checkout link.
+        this.checkoutLink = page.getByRole('link', { name: 'Checkout' })
     }
 
     /**
-     * Moves to the signup page by clicking the "Move to Signup" button.
-     * @async
-     * @method
-     * @returns {Promise<void>} - A promise that resolves once the navigation to the signup page is complete.
+     * Gets the count of items in the basket.
+     * @returns {Promise<number>} The count of items in the basket.
      */
-    moveToSignup = async () => {
-        // Wait for the "Move to Signup" button to be present.
-        await this.moveToSignupButton.waitFor();
+    getBasketCount = async () => {
+        // Wait for the basket counter element to be visible.
+        await this.basketCounter.waitFor()
+        // Get the inner text of the basket counter element.
+        const text = await this.basketCounter.innerText()
+        // Parse the text to an integer and return it.
+        return parseInt(text, 10)
+    }
 
-        // Click the "Move to Signup" button.
-        await this.moveToSignupButton.click();
-
-        // Wait for the page navigation to the signup page.
-        await this.page.waitForURL(/\/signup/);
+    /**
+     * Navigates to the checkout page.
+     * @returns {Promise<void>}
+     */
+    goToCheckout = async () => {
+        // Wait for the checkout link to be visible.
+        await this.checkoutLink.waitFor()
+        // Click on the checkout link.
+        await this.checkoutLink.click()
+        // Wait for the URL to change to "/basket".
+        await this.page.waitForURL("/basket")
     }
 }
