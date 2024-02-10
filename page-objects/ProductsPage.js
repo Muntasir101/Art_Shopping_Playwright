@@ -3,14 +3,23 @@ import { Navigation } from "./Navigations"
 
 export class ProductPage{
 
-    constructor(page){
-        this.page = page
+/**
+ * Represents a constructor function for a page object.
+ * @param {Object} page - The page object containing locators and methods.
+ */
+constructor(page) {
+    // Assign the page object to the instance property.
+    this.page = page;
 
-        this.addButtons = page.locator('[data-qa="product-button"]')
-        this.sortDropdown = page.locator('.sort-dropdown')
-        this.productTitle = page.locator('[data-qa="product-title"]')
+    // Locate the add buttons element on the page.
+    this.addButtons = page.locator('[data-qa="product-button"]');
 
-    }
+    // Locate the sort dropdown element on the page.
+    this.sortDropdown = page.locator('.sort-dropdown');
+
+    // Locate the product title element on the page.
+    this.productTitle = page.locator('[data-qa="product-title"]');
+}
 
     visit = async() =>{
         await this.page.goto("/")
